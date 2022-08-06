@@ -8,12 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      TARGET_REF: ${{ github.ref_name }}
     steps:
       # checkout cannot detect job
       # - uses: actions/checkout@v2
       - name: run simple
         # do not reference as local action! (runs: ./)
-        uses: sarisia/actions-status-discord@${{ github.ref_name }}
+        uses: sarisia/actions-status-discord@${{ env.TARGET_REF }}
         with:
           description: |
             repository: ${{ github.action_repository }}
